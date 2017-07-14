@@ -1,0 +1,1 @@
+This project uses some fancy new tricks. To build it run `./build.sh`. Not `application-deploy/whatever/build.sh` or anything else.
