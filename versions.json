@@ -1,0 +1,17 @@
+{
+    "platform version": "2017.7",
+	"system types": {
+		"auto-webclient": {
+			"version": "federation.1"
+		},
+		"datastore": {
+			"version": "4"
+		},
+		"reporter": {
+			"version": "4"
+		},
+		"webclient": {
+			"version": "federation.1"
+		}
+	}
+}

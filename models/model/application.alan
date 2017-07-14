@@ -1,0 +1,10 @@
+roles
+	'User' requires anonymous
+	allow anonymous
+
+root mutation requires 'User' read requires 'User' (
+)
+
+component types
+
+numerical types

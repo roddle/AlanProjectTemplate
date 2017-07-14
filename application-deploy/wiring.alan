@@ -1,0 +1,10 @@
+systems
+	'server'
+		exposes model as 'model'
+	'reporter'
+		consumes model as 'model'
+	'custom_client'
+		consumes model as 'model'
+	'generated_client'
+		consumes model as 'model'
+
