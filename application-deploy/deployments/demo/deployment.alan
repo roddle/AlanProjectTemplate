@@ -18,6 +18,12 @@ system instances
 		forwards 'report-manage' to internal system 'reporter':'report-manage'
 		forwards 'report-download' to internal system 'reporter':'report-download'
 
+	'generated_client' ( 'generated_client' )
+		consumes model from 'server'
+		provides connection 'http'
+		forwards 'report-manage' to internal system 'reporter':'report-manage'
+		forwards 'report-download' to internal system 'reporter':'report-download'
+
 providing connections
 	'frontend' from internal system 'custom_client'
 		custom protocol 'http'
