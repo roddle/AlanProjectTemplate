@@ -27,17 +27,17 @@ system instances
 providing connections
 	'frontend' from internal system 'custom_client'
 		custom protocol 'http'
-		expose as socket "0.0.0.0" : 8000
+		expose as socket "0.0.0.0" : 11100
 	'backend' from internal system 'generated_client'
 		custom protocol 'http'
-		expose as socket "0.0.0.0" : 8001
+		expose as socket "0.0.0.0" : 11101
 
 enable persistent storage for
 	'server'
 
 generator ((
-	proxy socket "127.0.0.1": 8200
-	port 8201
+	proxy socket "127.0.0.1": 8000
+	port 8100
 	admin "/admin"
 	email no
 ))
