@@ -1,7 +1,7 @@
 {
     "platform version": "2017.9",
 	"system types": {
-		"auto-webclient": {
+		"auto-webclient-next": {
 			"version": "federation.a6"
 		},
 		"datastore": {
@@ -10,8 +10,8 @@
 		"reporter": {
 			"version": "4"
 		},
-		"webclient": {
-			"version": "enterprise.20"
+		"webclient-next": {
+			"version": "federation.20"
 		}
 	}
 }

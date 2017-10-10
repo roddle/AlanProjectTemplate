@@ -12,23 +12,14 @@ system instances
 		provides connection 'report-manage'
 		provides connection 'report-download'
 
-	'custom_client' ( 'custom_client' )
-		consumes model from 'server'
-		provides connection 'http'
-		forwards 'report-manage' to internal system 'reporter':'report-manage'
-		forwards 'report-download' to internal system 'reporter':'report-download'
-
-	'generated_client' ( 'generated_client' )
+	'client' ( 'client' )
 		consumes model from 'server'
 		provides connection 'http'
 		forwards 'report-manage' to internal system 'reporter':'report-manage'
 		forwards 'report-download' to internal system 'reporter':'report-download'
 
 providing connections
-	'frontend' from internal system 'custom_client'
-		custom protocol 'http'
-		expose as socket "0.0.0.0" : 11100
-	'backend' from internal system 'generated_client'
+	'client' from internal system 'client'
 		custom protocol 'http'
 		expose as socket "0.0.0.0" : 11101
 
@@ -36,7 +27,7 @@ enable persistent storage for
 	'server'
 
 generator ((
-	proxy socket "127.0.0.1": 8000
+	proxy socket "0.0.0.0": 8000
 	port 8100
 	admin "/admin"
 	email no

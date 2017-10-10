@@ -7,5 +7,3 @@ fabric.sublime-workspace
 application-deploy/definition.json
 
 systems/*/scripts
-application-deploy/deployments/*/build.sh
-application-deploy/deployments/*/start.sh
