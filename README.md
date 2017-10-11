@@ -10,7 +10,7 @@ https://www.m-industries.com/fabric.html
 
 Then in a terminal run:
 1. `fabric fetch`
-2. `fabric build --all yes (note: this will fail)`
+2. `fabric build --all yes` (note: this will fail)
 3. `./devenv/system-types/auto-webclient/system-scripts/generate_annotations.sh systems/client/definition/`
 
 Now you're ready to edit models/model/application.alan. To update the annotations you can:
