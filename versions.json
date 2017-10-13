@@ -9,9 +9,6 @@
 		},
 		"reporter": {
 			"version": "4"
-		},
-		"webclient-next": {
-			"version": "federation.20"
 		}
 	}
 }
