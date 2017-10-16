@@ -2,13 +2,13 @@
     "platform version": "2017.9",
 	"system types": {
 		"auto-webclient-next": {
-			"version": "federation.a6"
+			"version": "1"
 		},
 		"datastore-next": {
-			"version": "4"
+			"version": "1"
 		},
 		"reporter": {
-			"version": "4"
+			"version": "1"
 		}
 	}
 }
