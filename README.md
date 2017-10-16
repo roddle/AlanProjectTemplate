@@ -6,7 +6,7 @@ All the basics you need to create and run a Fabric application.
 ## Getting started
 
 To get started, make sure you have installed the Fabric utilities:
-https://www.m-industries.com/fabric.html
+https://github.com/M-industries/FabricProjectTemplate/wiki
 
 Then in a terminal run:
 1. `fabric fetch`
