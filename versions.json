@@ -4,7 +4,7 @@
 		"auto-webclient-next": {
 			"version": "federation.a6"
 		},
-		"datastore": {
+		"datastore-next": {
 			"version": "4"
 		},
 		"reporter": {
