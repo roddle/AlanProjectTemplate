@@ -24,7 +24,7 @@ providing connections
 		expose as socket "0.0.0.0" : 11101
 
 enable persistent storage for
-	'server'
+	// 'server'
 
 generator ((
 	proxy socket "0.0.0.0": 8000
