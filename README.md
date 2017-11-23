@@ -28,10 +28,10 @@ https://fabric.m-industries.com
 
 MacOS and Linux already come with bash. On Windows this is an optional feature:
 
-- Check if you have Windows 10 build 16215: 
+- Check that you have Windows 10 build 16215 or newer: 
   https://msdn.microsoft.com/en-us/commandline/wsl/troubleshooting#check-your-build-number
 - Open Powershell
-- Right-click on its icon in the Start Bar and select "Run as administrator"
+- Right-click on its icon in the Taskbar and select "Run as administrator"
 - In the new window paste and then run this:
   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 - Reboot
