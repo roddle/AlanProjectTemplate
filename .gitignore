@@ -1,8 +1,9 @@
 devenv
 runenv
+tools
+fabric
 
-fabric.sublime-project
-fabric.sublime-workspace
+*.sublime-workspace
 
 application-deploy/definition.json
 

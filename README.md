@@ -1,36 +1,42 @@
-# Fabric Project Template
+# Fabric - One Step Project
 
-All the basics you need to create and run a Fabric application.
+You have downloaded a One Step project template. To get started:
+
+- run the start.sh script in a terminal (with bash, see below) 
+
+See? One step. Your application is now available at:
+
+http://localhost:8000/client 
 
 
-## Getting started
+## Creating your own application
 
-To get started, make sure you have installed the Fabric utilities:
-https://github.com/M-industries/FabricProjectTemplate/wiki
+To change the application, all you have to do is:
 
-Then in a terminal run:
-1. `fabric fetch`
-2. `fabric build --all-yes` (note: this will fail)
-3. `./devenv/system-types/auto-webclient-next/system-scripts/generate_annotations.sh systems/client/definition/`
+- modify the file at models/model/application.alan
+- run the start.sh script again
 
-Now you're ready to edit models/model/application.alan. To update the annotations you can:
 
-- edit system/client/definition/annotations.alan by hand
-- or remove the file and run step 3 again
-- run step 3 without removing the existing annotations and compare them against the newly generated annotations_generated.alan
+## Learn more
 
-## Running your application
+Fabric includes Excel reports, todo's, support for all popular editors, and the language has more features than can be covered in a tutorial. If you're ready for the next level go to:
 
-In a terminal, from the root of this project run:
+https://fabric.m-industries.com
 
-- `fabric run devenv/output/demo.img <runenv>`
 
-Replace `<runenv>` with directory of your choosing. Just `runenv` is fine on macOS and Linux, but under WSL you should point it to something in your Linux home dir (because of some minor interop issues), e.g. `~/runenv`.
+## Bash on Windows
 
-This will create a runenv directory and download the runtime binaries. It will fail because there is no data to run with yet, but that's ok. To create an initial dataset run:
+MacOS and Linux already come with bash. On Windows this is an optional feature:
 
-- `echo "{}" | ./devenv/system-types/datastore-next/tools/repair-instance-data devenv/output/interm/objects/server.d/package > <runenv>/stack/sandbox/data/server/session/init-0000000000000000.json`
+- Check if you have Windows 10 build 16215: 
+  https://msdn.microsoft.com/en-us/commandline/wsl/troubleshooting#check-your-build-number
+- Open Powershell
+- Right-click on its icon in the Start Bar and select "Run as administrator"
+- In the new window paste and then run this:
+  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+- Reboot
+- Install Ubuntu from the Windows Store
 
-Again, `<runenv>` should be replaced with the runenv dir you picked.
+More info: https://msdn.microsoft.com/en-us/commandline/wsl/install-win10
 
-Most changes to your model will invalidate your dataset. As long as you're still sketching out your model it problably best to create a new initial dataset every time you want to run it.
+You're now ready to open Ubuntu and run that start.sh script.
