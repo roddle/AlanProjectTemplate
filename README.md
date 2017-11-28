@@ -35,8 +35,9 @@ MacOS and Linux already come with bash. On Windows this is an optional feature:
 - In the new window paste and then run this:
   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 - Reboot
-- Install Ubuntu from the Windows Store
+- Install Ubuntu from the Microsoft Store
 
 More info: https://msdn.microsoft.com/en-us/commandline/wsl/install-win10
+Note that in Ubuntu "c:/" is located at "/mnt/c"
 
-You're now ready to open Ubuntu and run that start.sh script.
+You're now ready to open Ubuntu and run that start.sh script. 
