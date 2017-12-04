@@ -1,6 +1,6 @@
-# Fabric - One Step Project
+# Alan - One Step Project
 
-You have downloaded a One Step project template. To get started:
+You have downloaded a One Step project template for the Alan Application Platform. To get started:
 
 - run the start.sh script in a terminal (with bash, see below) 
 
@@ -21,7 +21,7 @@ To change the application, all you have to do is:
 
 Fabric includes Excel reports, todo's, support for all popular editors, and the language has more features than can be covered in a tutorial. If you're ready for the next level go to:
 
-https://fabric.m-industries.com
+https://alan.m-industries.com
 
 
 ## Bash on Windows
