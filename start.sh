@@ -10,7 +10,7 @@ fi
 if [ ! -d tools ]; then
 	echo ""
 	echo "Downloading tools"
-	curl -o .temp.tar.gz https://fabric.m-industries.com/utils/"${PLATFORM}".tar.gz
+	curl -o .temp.tar.gz https://alan.m-industries.com/utils/5/"${PLATFORM}"/utils.tar.gz
 	tar xf  .temp.tar.gz -C .
 	rm      .temp.tar.gz
 fi
@@ -18,14 +18,14 @@ fi
 if [ ! -d devenv ]; then
 	echo ""
 	echo "Downloading devenv"
-	./fabric fetch
+	./alan fetch
 fi
 
 if [ -f devenv/output/interm/wiring.pkg ]; then
 	echo ""
 	echo "Checking the model"
 	cd models/model
-	../../fabric validate --wire
+	../../alan validate --wire
 	cd ../..
 fi
 
@@ -36,7 +36,7 @@ rm -f systems/client/definition/annotations.alan
 
 echo ""
 echo "Building the project"
-./fabric build --all-yes
+./alan build --all-yes
 
 echo ""
 echo "Creating runtime storage at ~/runenv"
@@ -45,4 +45,4 @@ rm -rf   ~/runenv/stack/sandbox/data/server/session/
 mkdir -p ~/runenv/stack/sandbox/data/server/session/
 echo "{}" | ./devenv/system-types/datastore-next/tools/repair-instance-data devenv/output/interm/objects/server.d/package > ~/runenv/stack/sandbox/data/server/session/init-0000000000000000.json
 
-./fabric run devenv/output/demo.img ~/runenv
+./alan run devenv/output/demo.img ~/runenv
