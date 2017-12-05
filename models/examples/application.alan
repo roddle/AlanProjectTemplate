@@ -102,7 +102,7 @@ root mutation requires 'User' read requires 'User' (
 
 
 	//
-	// Derived Numbers
+	// Derivations
 	//
 
 	'measurements' -> dictionary (
