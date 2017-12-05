@@ -10,7 +10,7 @@ fi
 if [ ! -d tools ]; then
 	echo ""
 	echo "Downloading tools"
-	curl -o .temp.tar.gz https://alan.m-industries.com/utils/5/"${PLATFORM}"/utils.tar.gz
+	curl -# -o .temp.tar.gz https://alan.m-industries.com/utils/5/"${PLATFORM}"/utils.tar.gz
 	tar xf  .temp.tar.gz -C .
 	rm      .temp.tar.gz
 fi
@@ -43,6 +43,7 @@ echo "Creating runtime storage at ~/runenv"
 
 rm -rf   ~/runenv/stack/sandbox/data/server/session/
 mkdir -p ~/runenv/stack/sandbox/data/server/session/
-echo "{}" | ./devenv/system-types/datastore-next/tools/repair-instance-data devenv/output/interm/objects/server.d/package > ~/runenv/stack/sandbox/data/server/session/init-0000000000000000.json
+echo "{}" | ./devenv/system-types/datastore/tools/repair-instance-data devenv/output/interm/objects/server.d/package > ~/runenv/stack/sandbox/data/server/session/init-0000000000000000.json
 
-./alan run devenv/output/demo.img ~/runenv
+./alan deploy devenv/output/demo.img ~/runenv
+./alan run ~/runenv
