@@ -1,0 +1,200 @@
+roles
+	'User' requires anonymous
+	allow anonymous
+/*
+	Read and write access to data can be restricted to certain roles.
+	In this example we have a single role and don't require users to log in.
+	There is currently no easy way to bootstrap a project that does require
+	logging in, but such features will be added and documented in future
+	updates.
+*/
+
+root mutation requires 'User' read requires 'User' (
+	//
+	// Elementary Data
+	//
+
+	'dictionary 1' -> dictionary (
+		/*
+			A dictionary is similar to a table in a relational database.
+			There is no explicit primary key defined, every dictionary entry has a
+			unique key (a text) by default.
+		*/
+
+		'a text property' -> text
+		/*
+			A text property has no constraints and is never invalid.
+		*/
+
+
+		'a integer property' -> integer 'meters'
+		'a natural property' -> natural 'meters'
+		'a date property'    -> integer 'date'
+		/*
+			Numbers have a numerical type, e.g. 'meters' or 'kilograms'.
+
+			There are 2 base types: integer and natural.
+			Naturals are larger than 0. Because they are guaranteed to be > 0,
+			they can be used in divisions.
+			Integers are just like as the mathematical idea of an integer:
+			a number that can be negative, 0 or positive.
+
+			A date property is an integer. The only thing that makes a date
+			special is its presentation in the user interface. A 'date' or
+			'date and time' number is recognized as such when generating the
+			GUI. The GUI also has special widgets for numbers that are
+			'seconds', 'minutes' and 'hours'.
+		*/
+
+
+		'a state group property' -> stategroup (
+			'option 1' -> (
+				'a text under option 1' -> text
+			)
+			'option 2' -> ( )
+		)
+		/*
+			State groups require the user to make a choice between one of the
+			options. Every option can have additional properties that are only
+			available if that option is selected.
+			This concept is comparable with what in functional programming
+			languages is called 'sum types' or 'tagged unions'. It is also
+			comparable to the 'choice' element in xml schema
+		*/
+
+
+		'a group property' -> group (
+			'a text in the group' -> text
+			'a second text in the group' -> text
+		)
+		/*
+			A group creates a namespace. It doesn't add data, but it allows you
+			to group properties together to make the model more readable, which
+			also tends to make the GUI more readable as well.
+		*/
+
+	)
+	'dictionary 2' -> dictionary (
+
+		'a reference' -> reference ( .^ . 'dictionary 1' )
+		/*
+			References are similar to foreign keys in a relational database, or
+			pointers in a programming language.
+			A reference is defined by a path to a collection. In the GUI, the
+			user will pick an entry from that collection.
+			To reference the 'dictionary 1' collection, we describe a path by:
+			- stepping up out of the current collection (.^) *
+			- select a collection (.)
+			- called 'dictionary 1'
+
+			* You can also step out of a group (+^) or a state group (?^)
+		*/
+
+
+		'a matrix' -> matrix ( .^ . 'dictionary 1' ) (
+			'a text in the matrix' -> text
+		)
+		/*
+			A matrix is a collection, similar to a dictionary. In a matrix the
+			key is a reference.
+		*/
+	)
+
+
+	//
+	// Derived Numbers
+	//
+
+	'measurements' -> dictionary (
+		'distance 1' -> natural 'meters'
+		'distance 2' -> natural 'meters'
+		'multiplier' -> integer 'count'
+
+		// Add multiple numbers
+		'total distance' ~> natural 'meters' (
+			sumlist (
+				# : 'distance 1'
+				# : 'distance 2'
+			)
+		)
+		// Subtract a number
+		'difference' ~> integer 'meters' (
+			sumlist (
+				# : 'distance 1'
+				# - : 'distance 2'
+			)
+		)
+		// The product of two numbers
+		'multiplied distance 1' ~> integer 'meters' (
+			product
+				# : 'distance 1' as 'meters'
+				# : 'multiplier'
+		)
+		// Division (requires the denominator to be a natural)
+		'distance 1 contribution' ~> integer 'permille' from 'fraction' (
+			division
+				# : 'distance 1' as 'meters'
+				# : 'total distance'
+		)
+	)
+
+	// Count the entries in a collection
+	'number of measurements' ~> integer 'count' (
+		count .'measurements'
+	)
+
+	// Sum all values in a collection
+	'total measurement' ~> integer 'meters' (
+		sum # .'measurements' : 'total distance'
+	)
+
+	// Compare two numbers
+	'required measurements' -> integer 'count'
+	'enough measurements' ~> stategroup (
+		# : 'number of measurements' == # : 'required measurements'
+		// compare against zero: ... == # zero
+		yes -> 'yes'
+		no -> 'no'
+	) (
+		'yes' -> ( )
+		'no' -> ( )
+	)
+
+	// Map one or more state groups
+	'satisfied' ~> stategroup (
+		? : 'enough measurements' (
+			'yes' -> 'yes'
+			'no' -> 'no'
+		)
+	) (
+		'yes' -> ( )
+		'no' -> ( )
+	)
+)
+
+component types
+/*
+	Component types are typically left unused.
+*/
+
+
+numerical types
+/*
+	This list declares all the numerical types that can be used.
+	Also includes conversions.
+*/
+	'date'
+	'days'
+	'count'
+
+	'meters'
+		// declare that 'meters' times 'count' results in a 'meters' value
+		= 'meters' * 'count'
+
+	'fraction'
+		// declare that 'meters' divided by meters results in a 'fraction'
+		= 'meters' / 'meters'
+
+	'permille'
+		// declare that a fraction times 1000 is a 'permille'
+		= 'fraction' * 1 * 10 ^ 3
