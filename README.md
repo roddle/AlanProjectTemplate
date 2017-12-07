@@ -13,7 +13,8 @@ http://localhost:8000/client
 
 To change the application, all you have to do is:
 
-- modify the file at models/model/application.alan
+- modify the file at models/model/application.alan  
+  you can find examples at models/examples/application.alan
 - run the start.sh script again
 
 
