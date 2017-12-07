@@ -51,7 +51,9 @@ root mutation requires 'User' read requires 'User' (
 			'option 1' -> (
 				'a text under option 1' -> text
 			)
-			'option 2' -> ( )
+			'option 2' -> (
+				workfor 'User'
+			)
 		)
 		/*
 			State groups require the user to make a choice between one of the
@@ -60,6 +62,11 @@ root mutation requires 'User' read requires 'User' (
 			This concept is comparable with what in functional programming
 			languages is called 'sum types' or 'tagged unions'. It is also
 			comparable to the 'choice' element in xml schema
+
+			"workfor" states that an entry is a todo for the 'User' role, if
+			it's in that state. Being in state 'option 2' here creates work
+			for someone to take it out of that state. This workfor can be
+			queried in the GUI.
 		*/
 
 
