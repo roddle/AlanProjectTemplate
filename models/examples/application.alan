@@ -17,8 +17,8 @@ root mutation requires 'User' read requires 'User' (
 	'dictionary 1' -> dictionary (
 		/*
 			A dictionary is similar to a table in a relational database.
-			There is no explicit primary key defined, every dictionary entry has a
-			unique key (a text) by default.
+			There is no explicit primary key defined, every dictionary entry
+			has a unique key (a text) by default.
 		*/
 
 		'a text property' -> text
