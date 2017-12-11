@@ -42,3 +42,9 @@ More info: https://msdn.microsoft.com/en-us/commandline/wsl/install-win10.
 Note that in Ubuntu "c:/" is located at "/mnt/c".
 
 You're now ready to open Ubuntu and run that start.sh script. 
+
+
+----------------
+
+License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)  
+Covers non-commercial applications. For commercial applications without support, escrow or integration with commercial system, a free SE license can be requested. For other applications please contact info@m-industries.com.
