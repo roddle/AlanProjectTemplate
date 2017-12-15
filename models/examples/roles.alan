@@ -1,0 +1,32 @@
+/*
+	This example adds two roles to the application,
+	sets up a collection of users,
+	and assigns these users to roles.
+	Anonymous login is still enabled because there
+	wouldn't be a way to get into the application
+	with an empty dataset otherwise.
+*/
+
+roles
+	'User' requires dynamic
+	'Admin' requires dynamic ? 'Admin' * 'Yes'
+	'Anonymous' requires dynamic anonymous
+
+dynamic users
+	// Point the application to the collection of users
+	path : 'Users'
+	// Tell the application which property stores the password
+	password property 'Password'
+
+	// Don't require login to use the application
+allow anonymous
+
+root mutation requires 'Anonymous' read requires 'Anonymous' (
+	'Users' -> dictionary (
+		'Password' -> text
+		'Admin' -> stategroup (
+			'Yes' -> ( )
+			'No' -> ( )
+		)
+	)
+)
