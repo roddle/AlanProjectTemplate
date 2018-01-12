@@ -10,7 +10,7 @@ fi
 if [ ! -d tools ]; then
 	echo ""
 	echo "Downloading tools"
-	curl -# -o .temp.tar.gz "https://alan-platform.com/utils/5/${PLATFORM}/utils.tar.gz"
+	curl -# -o .temp.tar.gz "https://alan-platform.com/utils/6/${PLATFORM}/utils.tar.gz"
 	tar xf  .temp.tar.gz -C .
 	rm      .temp.tar.gz
 fi
