@@ -5,23 +5,21 @@ external systems
 system instances
 	'server' ( 'server' )
 		exposes model
+		instance data from local
 
 	'reporter' ( 'reporter' )
 		consumes model from 'server'
-
-		provides connection 'report-manage'
-		provides connection 'report-download'
+		instance data from local
 
 	'client' ( 'client' )
 		consumes model from 'server'
-		provides connection 'http'
 		forwards 'report-manage' to internal system 'reporter':'report-manage'
 		forwards 'report-download' to internal system 'reporter':'report-download'
 
 providing connections
 	'client' from internal system 'client'
 		custom protocol 'http'
-		expose as socket "0.0.0.0" : 11101
+		expose as socket "0.0.0.0" : 11100
 
 enable persistent storage for
 	// 'server'

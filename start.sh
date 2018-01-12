@@ -24,9 +24,9 @@ fi
 if [ -f devenv/output/interm/wiring.pkg ]; then
 	echo ""
 	echo "Checking the model"
-	cd models/model
-	../../alan validate --wire
-	cd ../..
+	pushd shared/models/model >> /dev/null
+	../../../alan validate --wire
+	popd >> /dev/null
 fi
 
 echo ""
@@ -41,9 +41,14 @@ echo "Building the project"
 echo ""
 echo "Creating runtime storage at ~/runenv"
 
-rm -rf   ~/runenv/stack/sandbox/data/server/session/
-mkdir -p ~/runenv/stack/sandbox/data/server/session/
-echo "{}" | ./devenv/system-types/datastore/tools/repair-instance-data devenv/output/interm/objects/server.d/package > ~/runenv/stack/sandbox/data/server/session/init-0000000000000000.json
+mkdir -p deployments/demo/instances/server/
+echo "{}" | ./devenv/system-types/datastore/tools/datastore-instance-repair devenv/output/interm/objects/server.d/package > deployments/demo/instances/server/instance.json
 
-./alan deploy devenv/output/demo.img ~/runenv
-./alan run ~/runenv
+echo ""
+echo "Packaging the project"
+./alan package deployments/demo
+./alan deploy
+
+echo ""
+echo "Starting the stack"
+./alan run
