@@ -4,7 +4,11 @@ set -e
 if [[ $(uname) == "Darwin" ]]; then
 	PLATFORM="darwin-x64"
 else
-	PLATFORM="linux-x64"
+	if grep -q Microsoft /proc/version; then
+		PLATFORM="wsl"
+	else
+		PLATFORM="linux-x64"
+	fi
 fi
 
 if [ ! -d tools ]; then
@@ -51,4 +55,9 @@ echo "Packaging the project"
 
 echo ""
 echo "Starting the stack"
-./alan run
+
+if [ $PLATFORM == "wsl" ]; then
+	./alan run devenv/output/project.definition ~/runenv
+else
+	./alan run
+fi
