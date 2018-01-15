@@ -27,7 +27,21 @@ https://alan-platform.com/
 
 ## Bash on Windows
 
-Currently Windows is not fully supported. We're bringing this back as soon as we can.
+MacOS and Linux already come with bash. On Windows this is an optional feature:
+
+- Check that you have Windows 10 build 16215 or newer:
+  https://msdn.microsoft.com/en-us/commandline/wsl/troubleshooting#check-your-build-number.
+- Open Powershell.
+- Right-click on its icon in the Taskbar and select "Run as administrator".
+- In the new window paste and then run this:
+  `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
+- Reboot.
+- Install Ubuntu from the Microsoft Store.
+
+More info: https://msdn.microsoft.com/en-us/commandline/wsl/install-win10.
+Note that in Ubuntu "c:/" is located at "/mnt/c".
+
+You're now ready to open Ubuntu and run that start.sh script.
 
 
 ----------------
