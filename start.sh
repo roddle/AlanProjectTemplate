@@ -4,10 +4,9 @@ set -e
 if [[ $(uname) == "Darwin" ]]; then
 	PLATFORM="darwin-x64"
 else
+	PLATFORM="linux-x64"
 	if grep -q Microsoft /proc/version; then
-		PLATFORM="wsl"
-	else
-		PLATFORM="linux-x64"
+		WSL=true
 	fi
 fi
 
@@ -51,13 +50,14 @@ echo "{}" | ./devenv/system-types/datastore/tools/datastore-instance-repair deve
 echo ""
 echo "Packaging the project"
 ./alan package deployments/demo
-./alan deploy
 
 echo ""
 echo "Starting the stack"
 
-if [ $PLATFORM == "wsl" ]; then
-	./alan run devenv/output/project.definition ~/runenv
+if [[ $WSL = true ]]; then
+	./alan deploy --path ~/runenv
+	./alan run ~/runenv
 else
+	./alan deploy
 	./alan run
 fi
