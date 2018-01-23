@@ -51,6 +51,11 @@ echo ""
 echo "Packaging the project"
 ./alan package deployments/demo
 
+if [[ $1 == "--build-only" ]]; then
+	echo "Build succesfull"
+	exit 0
+fi
+
 echo ""
 echo "Starting the stack"
 
