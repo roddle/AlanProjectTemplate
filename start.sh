@@ -45,7 +45,7 @@ echo ""
 echo "Creating runtime storage at ~/runenv"
 
 mkdir -p deployments/demo/instances/server/
-echo "{}" | ./devenv/system-types/datastore/tools/datastore-instance-repair devenv/output/interm/objects/server.d/package > deployments/demo/instances/server/instance.json
+echo "{}" | ./devenv/system-types/datastore-next/tools/datastore-instance-repair devenv/output/interm/objects/server.d/package > deployments/demo/instances/server/instance.json
 
 echo ""
 echo "Packaging the project"

@@ -1,14 +1,14 @@
 {
-    "platform version": "2017.12",
+    "platform version": "2017.13",
 	"system types": {
 		"auto-webclient-next": {
-			"version": "generations.a4"
+			"version": "generations.a5"
 		},
-		"datastore": {
-			"version": "7"
+		"datastore-next": {
+			"version": "8"
 		},
 		"reporter": {
-			"version": "5"
+			"version": "6"
 		}
 	}
 }
