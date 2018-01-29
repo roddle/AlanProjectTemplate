@@ -51,18 +51,26 @@ echo ""
 echo "Packaging the project"
 ./alan package deployments/demo
 
-if [[ $1 == "--build-only" ]]; then
-	echo "Build succesfull"
-	exit 0
-fi
-
-echo ""
-echo "Starting the stack"
-
 if [[ $WSL = true ]]; then
+	echo ""
+	echo "Deploying the stack"
 	./alan deploy --path ~/runenv
+	if [[ $1 == "--build-only" ]]; then
+		echo "Build succesfull"
+		exit 0
+	fi
+	echo ""
+	echo "Starting the stack"
 	./alan run ~/runenv
 else
+	echo ""
+	echo "Deploying the stack"
 	./alan deploy
+	if [[ $1 == "--build-only" ]]; then
+		echo "Build succesfull"
+		exit 0
+	fi
+	echo ""
+	echo "Starting the stack"
 	./alan run
 fi
