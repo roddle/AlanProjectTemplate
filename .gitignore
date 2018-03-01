@@ -1,8 +1,7 @@
 alan
+alan-fetch
 devenv
 runenv
-tools
-fabric
 wiring/definition.json
 
 *.sublime-workspace

@@ -2,27 +2,20 @@ issue channels
 
 external systems
 
-system instances
-	'server' ( 'server' )
-		exposes model
-		instance data from local
+instance data
+	'server'
+		from local
 
-	'reporter' ( 'reporter' )
-		consumes model from 'server'
-		instance data from local
+	'reporter'
+		from local
 
-	'client' ( 'client' )
-		consumes model from 'server'
-		forwards 'report-manage' to internal system 'reporter':'report-manage'
-		forwards 'report-download' to internal system 'reporter':'report-download'
+system options
 
 providing connections
-	'client' from internal system 'client'
-		custom protocol 'http'
-		expose as socket "0.0.0.0" : 11100
+	'client' socket "0.0.0.0" : 11100
 
 enable persistent storage for
-	// 'server'
+	'server'
 
 generator ((
 	proxy socket "0.0.0.0": 8000

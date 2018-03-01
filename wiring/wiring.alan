@@ -1,8 +1,14 @@
+external systems
+
 systems
 	'server'
 		exposes model as 'model'
 	'reporter'
-		consumes model as 'model'
+		consumes model as 'model' from 'server'
 	'client'
-		consumes model as 'model'
+		consumes model as 'model' from 'server'
+		forwards connection 'report-manage' to internal system 'reporter':'report-manage'
+		forwards connection 'report-download' to internal system 'reporter':'report-download'
 
+providing connections
+	'client' from internal system 'client' custom protocol 'http'

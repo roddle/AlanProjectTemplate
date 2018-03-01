@@ -10,10 +10,10 @@ else
 	fi
 fi
 
-if [ ! -d tools ]; then
+if [ ! -f alan ]; then
 	echo ""
 	echo "Downloading tools"
-	curl -# -o .temp.tar.gz "https://alan-platform.com/utils/6/${PLATFORM}/utils.tar.gz"
+	curl -# -o .temp.tar.gz "https://www.m-industries.com/tools/utils/7/${PLATFORM}/utils.tar.gz"
 	tar xf  .temp.tar.gz -C .
 	rm      .temp.tar.gz
 fi
@@ -35,7 +35,7 @@ fi
 echo ""
 echo "Generating the GUI"
 rm -f systems/client/definition/annotations.alan
-./devenv/system-types/auto-webclient-next/system-scripts/generate_annotations.sh systems/client/definition/
+alan script client generate_annotations.sh
 
 echo ""
 echo "Building the project"
@@ -45,7 +45,7 @@ echo ""
 echo "Creating runtime storage at ~/runenv"
 
 mkdir -p deployments/demo/instances/server/
-echo "{}" | ./devenv/system-types/datastore-next/tools/datastore-instance-repair devenv/output/interm/objects/server.d/package > deployments/demo/instances/server/instance.json
+echo "{}" | ./devenv/system-types/datastore/tools/datastore-instance-repair devenv/output/interm/objects/server.d/package > deployments/demo/instances/server/instance.json
 
 echo ""
 echo "Packaging the project"

@@ -1,10 +1,9 @@
+users anonymous
+
 roles
-	'User' requires anonymous
-	allow anonymous
+	'User' : anonymous
 
-root mutation requires 'User' read requires 'User' (
-)
 
-component types
+root #writer 'User' #reader 'User' { }
 
-numerical types
+numerical-types
