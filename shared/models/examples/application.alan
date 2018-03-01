@@ -1,6 +1,7 @@
+users anonymous
+
 roles
-	'User' requires anonymous
-	allow anonymous
+	'User' : anonymous
 /*
 	Read and write access to data can be restricted to certain roles.
 	In this example we have a single role and don't require users to log in.
@@ -9,27 +10,27 @@ roles
 	updates.
 */
 
-root mutation requires 'User' read requires 'User' (
+root #writer 'User' #reader 'User' {
 	//
 	// Elementary Data
 	//
 
-	'dictionary 1' -> dictionary (
+	'collection 1': collection {
 		/*
-			A dictionary is similar to a table in a relational database.
-			There is no explicit primary key defined, every dictionary entry
+			A collection is similar to a table in a relational database.
+			There is no explicit primary key defined, every collection entry
 			has a unique key (a text) by default.
 		*/
 
-		'a text property' -> text
+		'a text property': text
 		/*
 			A text property has no constraints and is never invalid.
 		*/
 
 
-		'a integer property' -> integer 'meters'
-		'a natural property' -> natural 'meters'
-		'a date property'    -> integer 'date'
+		'a integer property': integer 'meters'
+		'a natural property': natural 'meters'
+		'a date property'   : integer 'date'
 		/*
 			Numbers have a numerical type, e.g. 'meters' or 'kilograms'.
 
@@ -47,13 +48,13 @@ root mutation requires 'User' read requires 'User' (
 		*/
 
 
-		'a state group property' -> stategroup (
-			'option 1' -> (
-				'a text under option 1' -> text
-			)
-			'option 2' -> (
+		'a state group property': stategroup (
+			'option 1' -> {
+				'a text under option 1': text
+			}
+			'option 2' -> {
 				workfor 'User'
-			)
+			}
 		)
 		/*
 			State groups require the user to make a choice between one of the
@@ -70,122 +71,103 @@ root mutation requires 'User' read requires 'User' (
 		*/
 
 
-		'a group property' -> group (
-			'a text in the group' -> text
-			'a second text in the group' -> text
-		)
+		'a group property': group {
+			'a text in the group': text
+			'a second text in the group': text
+		}
 		/*
 			A group creates a namespace. It doesn't add data, but it allows you
 			to group properties together to make the model more readable, which
 			also tends to make the GUI more readable as well.
 		*/
 
-	)
-	'dictionary 2' -> dictionary (
+	}
+	'collection 2': collection {
 
-		'a reference' -> reference ( .^ . 'dictionary 1' )
+		'a reference': text -> .^ . 'collection 1'
 		/*
+			Here a text refers to an entry in another collection.
 			References are similar to foreign keys in a relational database, or
 			pointers in a programming language.
 			A reference is defined by a path to a collection. In the GUI, the
 			user will pick an entry from that collection.
-			To reference the 'dictionary 1' collection, we describe a path by:
+			To reference the 'collection 1' collection, we describe a path by:
 			- stepping up out of the current collection (.^) *
 			- select a collection (.)
-			- called 'dictionary 1'
+			- called 'collection 1'
 
 			* You can also step out of a group (+^) or a state group (?^)
 		*/
 
 
-		'a matrix' -> matrix ( .^ . 'dictionary 1' ) (
-			'a text in the matrix' -> text
-		)
+		'a matrix': collection -> .^ . 'collection 1' {
+			'a text in the matrix': text
+		}
 		/*
-			A matrix is a collection, similar to a dictionary. In a matrix the
-			key is a reference.
+			A matrix is a collection where each key is a reference.
 		*/
-	)
+	}
 
 
 	//
 	// Derivations
 	//
 
-	'measurements' -> dictionary (
-		'distance 1' -> natural 'meters'
-		'distance 2' -> natural 'meters'
-		'multiplier' -> integer 'count'
+	'measurements': collection {
+		'distance 1': natural 'meters'
+		'distance 2': natural 'meters'
+		'multiplier': integer 'count'
 
 		// Add multiple numbers
-		'total distance' ~> natural 'meters' (
-			sumlist (
-				# : 'distance 1'
-				# : 'distance 2'
-			)
+		'total distance':= natural 'meters' = sumlist (
+			# : 'distance 1',
+			# : 'distance 2'
 		)
 		// Subtract a number
-		'difference' ~> integer 'meters' (
-			sumlist (
-				# : 'distance 1'
-				# - : 'distance 2'
-			)
+		'difference':= integer 'meters' = sumlist (
+			# : 'distance 1',
+			- # : 'distance 2'
 		)
 		// The product of two numbers
-		'multiplied distance 1' ~> integer 'meters' (
-			product
-				# : 'distance 1' as 'meters'
-				# : 'multiplier'
+		'multiplied distance 1':= integer 'meters' = product (
+			# : 'distance 1' as 'meters',
+			# : 'multiplier'
 		)
 		// Division (requires the denominator to be a natural)
-		'distance 1 contribution' ~> integer 'permille' from 'fraction' (
-			division
-				# : 'distance 1' as 'meters'
-				# : 'total distance'
+		'distance 1 contribution':= integer 'permille' from 'fraction' = division (
+			# : 'distance 1' as 'meters'
+			# : 'total distance'
 		)
-	)
+	}
 
 	// Count the entries in a collection
-	'number of measurements' ~> integer 'count' (
-		count .'measurements'
-	)
+	'number of measurements':= integer 'count' = count . 'measurements'
 
 	// Sum all values in a collection
-	'total measurement' ~> integer 'meters' (
-		sum # .'measurements' : 'total distance'
-	)
+	'total measurement':= integer 'meters' = sum # .'measurements' : 'total distance'
 
 	// Compare two numbers
-	'required measurements' -> integer 'count'
-	'enough measurements' ~> stategroup (
-		# : 'number of measurements' == # : 'required measurements'
+	'required measurements': integer 'count'
+	'enough measurements':= stategroup = match ( # : 'number of measurements' == # : 'required measurements' ) (
 		// compare against zero: ... == # zero
-		yes -> 'yes'
-		no -> 'no'
+		| true = 'yes'
+		| false = 'no'
 	) (
-		'yes' -> ( )
-		'no' -> ( )
+		'yes' -> { }
+		'no' -> { }
 	)
 
 	// Map one or more state groups
-	'satisfied' ~> stategroup (
-		? : 'enough measurements' (
-			'yes' -> 'yes'
-			'no' -> 'no'
-		)
+	'satisfied':= stategroup = switch ( ? : 'enough measurements' ) (
+		| 'yes' = 'yes'
+		| 'no' = 'no'
 	) (
-		'yes' -> ( )
-		'no' -> ( )
+		'yes' -> { }
+		'no' -> { }
 	)
 )
 
-component types
-/*
-	Component types are typically left unused.
-*/
-
-
-numerical types
+numerical-types
 /*
 	This list declares all the numerical types that can be used.
 	Also includes conversions.
