@@ -35,7 +35,7 @@ fi
 echo ""
 echo "Generating the GUI"
 rm -f systems/client/definition/annotations.alan
-alan script client generate_annotations.sh
+./alan script client generate_annotations.sh
 
 echo ""
 echo "Building the project"
