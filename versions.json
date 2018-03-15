@@ -1,20 +1,20 @@
 {
-    "platform version": "2018.3",
+	"platform version": "2018.5",
 	"system types": {
-		"webclient": {
-			"version": "holodeck.5"
-		},
 		"auto-webclient": {
-			"version": "holodeck.a4"
+			"version": "holodeck.a6"
 		},
 		"datastore": {
-			"version": "12"
-		},
-		"reporter": {
-			"version": "8"
+			"version": "14"
 		},
 		"relational-database-bridge": {
 			"version": "63"
+		},
+		"reporter": {
+			"version": "10"
+		},
+		"webclient": {
+			"version": "holodeck.8"
 		}
 	}
 }
