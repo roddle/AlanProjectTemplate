@@ -165,7 +165,7 @@ root #writer 'User' #reader 'User' {
 		'yes' -> { }
 		'no' -> { }
 	)
-)
+}
 
 numerical-types
 /*
