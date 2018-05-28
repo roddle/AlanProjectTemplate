@@ -120,23 +120,23 @@ root #writer 'User' #reader 'User' {
 
 		// Add multiple numbers
 		'total distance':= natural 'meters' = sumlist (
-			# : 'distance 1',
-			# : 'distance 2'
+			# 'distance 1',
+			# 'distance 2'
 		)
 		// Subtract a number
 		'difference':= integer 'meters' = sumlist (
-			# : 'distance 1',
-			- # : 'distance 2'
+			# 'distance 1',
+			- # 'distance 2'
 		)
 		// The product of two numbers
 		'multiplied distance 1':= integer 'meters' = product (
-			# : 'distance 1' as 'meters',
-			# : 'multiplier'
+			# 'distance 1' as 'meters',
+			# 'multiplier'
 		)
 		// Division (requires the denominator to be a natural)
-		'distance 1 contribution':= integer 'permille' from 'fraction' = division (
-			# : 'distance 1' as 'meters'
-			# : 'total distance'
+		'distance 1 contribution':= integer 'permille' = from 'fraction' division (
+			# 'distance 1' as 'meters',
+			# 'total distance'
 		)
 	}
 
@@ -144,11 +144,13 @@ root #writer 'User' #reader 'User' {
 	'number of measurements':= integer 'count' = count . 'measurements'
 
 	// Sum all values in a collection
-	'total measurement':= integer 'meters' = sum # .'measurements' : 'total distance'
+	'total measurement':= integer 'meters' = sum .'measurements' # 'total distance'
 
 	// Compare two numbers
 	'required measurements': integer 'count'
-	'enough measurements':= stategroup = match ( # : 'number of measurements' == # : 'required measurements' ) (
+	'enough measurements':= stategroup = match (
+		# 'number of measurements' == # 'required measurements'
+	) (
 		// compare against zero: ... == # zero
 		| true = 'yes'
 		| false = 'no'
@@ -158,7 +160,7 @@ root #writer 'User' #reader 'User' {
 	)
 
 	// Map one or more state groups
-	'satisfied':= stategroup = switch ( ? : 'enough measurements' ) (
+	'satisfied':= stategroup = switch ( ? 'enough measurements' ) (
 		| 'yes' = 'yes'
 		| 'no' = 'no'
 	) (
