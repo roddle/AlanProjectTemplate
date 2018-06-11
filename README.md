@@ -1,47 +1,26 @@
-# Alan - One Step Project
+# Alan - Project Template
 
-You have downloaded a One Step project template for the Alan Application Platform. To get started:
+You are looking at the project template for the Alan Application Platform. 
 
-- run the start.sh script in a terminal (with bash, see below)
+To build your project:
 
-See? One step. Your application is now available at:
+- ./alan fetch
+- ./alan build
+- ./alan package devenv/output/project.definition deployments/demo
 
-http://localhost:8000/client
+To run the project:
+
+- Howto coming soon!
 
 
 ## Creating your own application
 
 To change the application, all you have to do is:
 
-- modify the file at shared/models/model/application.alan
-  you can find examples at shared/models/examples/application.alan
-- run the start.sh script again
-
-
-## Learn more
-
-Fabric includes Excel reports, todo's, support for all popular editors, and the language has more features than can be covered in a tutorial. If you're ready for the next level go to:
-
-https://alan-platform.com/
-
-
-## Bash on Windows
-
-MacOS and Linux already come with bash. On Windows this is an optional feature:
-
-- Check that you have Windows 10 build 16215 or newer:
-  https://msdn.microsoft.com/en-us/commandline/wsl/troubleshooting#check-your-build-number.
-- Open Powershell.
-- Right-click on its icon in the Taskbar and select "Run as administrator".
-- In the new window paste and then run this:
-  `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
-- Reboot.
-- Install Ubuntu from the Microsoft Store.
-
-More info: https://msdn.microsoft.com/en-us/commandline/wsl/install-win10.
-Note that in Ubuntu "c:/" is located at "/mnt/c".
-
-You're now ready to open Ubuntu and run that start.sh script.
+- Modify the file at shared/models/model/application.alan.
+  You can find examples at shared/models/examples/application.alan
+- Run ./alan build to verify that your changes are valid.
+- Update the from_scratch migration to define the initial data.
 
 
 ----------------
