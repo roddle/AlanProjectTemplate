@@ -5,9 +5,8 @@ roles
 /*
 	Read and write access to data can be restricted to certain roles.
 	In this example we have a single role and don't require users to log in.
-	There is currently no easy way to bootstrap a project that does require
-	logging in, but such features will be added and documented in future
-	updates.
+	See the Hours project roles.alan for an example with roles and permissions:
+	https://github.com/M-industries/Hours/blob/master/shared/models/hours/application.alan
 */
 
 root #writer 'User' #reader 'User' {
