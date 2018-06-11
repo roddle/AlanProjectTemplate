@@ -1,5 +1,3 @@
-issue channels
-
 external systems
 
 instance data
@@ -16,10 +14,3 @@ providing connections
 
 enable persistent storage for
 	'server'
-
-generator ((
-	proxy socket "0.0.0.0": 8000
-	port 8100
-	admin "/admin"
-	email no
-))

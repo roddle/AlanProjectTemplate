@@ -1,17 +1,19 @@
-alan
-alan-fetch
+# Utils #
+###################
+dataenv
 devenv
-runenv
-wiring/definition.json
-
-*.sublime-workspace
-
-application-deploy/definition.json
-
-systems/*/scripts
+migrations/*/data
+alan-tools
+README.md
 
 # Compiled source #
 ###################
+migration
+*.migration
+definition.json
+image
+*.image
+*.lib
 *.com
 *.class
 *.dll

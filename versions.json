@@ -1,20 +1,26 @@
 {
-	"platform version": "2018.5",
+	"platform version": "2018.28",
 	"system types": {
 		"auto-webclient": {
-			"version": "holodeck.a6"
+			"version": "intrepid.4"
 		},
 		"datastore": {
-			"version": "14"
+			"version": "24"
 		},
 		"relational-database-bridge": {
-			"version": "63"
+			"version": "66"
 		},
 		"reporter": {
-			"version": "10"
+			"version": "19"
 		},
 		"webclient": {
-			"version": "holodeck.8"
+			"version": "intrepid.4"
+		},
+		"sql-mirror": {
+			"version": "24"
+		},
+		"emailnotifier": {
+			"version": "3"
 		}
 	}
 }

@@ -1,0 +1,9 @@
+application creator: "M-industries"
+application name: "Fabric"
+application wallpaper url: ""
+anonymous login: enabled
+csv actions: disabled
+report limit: 500
+system administrator role: 'User'
+power user role: 'User'
+announcement: "" [ ]
