@@ -1,4 +1,4 @@
-You are looking at the project template for the Alan Application Platform. 
+You are looking at the project template for the Alan Application Platform.
 
 
 How to use Alan
@@ -17,7 +17,7 @@ You can download the `alan` utility, and the tools it uses, here:
 - https://alan-platform.com/utils/2018.28/linux-x64.tar.gz
 - https://alan-platform.com/utils/2018.28/windows-x64.tar.gz
 
-You can put `alan` in your project root and call it from there. In some cases it's easier to make it available everywhere via `$PATH`. Note that it will download its dependencies into an alan-tools directory. 
+You can put `alan` in your project root and call it from there. In some cases it's easier to make it available everywhere via `$PATH`. Note that it will download its dependencies into an alan-tools directory.
 
 
 Getting an Alan Application Server
@@ -54,6 +54,7 @@ Data Migration
 --------------
 Example layout for a migrations ("dataenv") environment:
 
+```
 migrations/
   \_ versions.json
   \_ from_version_x/
@@ -64,6 +65,7 @@ migrations/
               \_ application.alan
         \_ to/
               \_ application.alan(.link)
+```
 
 > The versions.json would be the same as the one in your project, but with only the "datastore" system type and the platform version.
 
