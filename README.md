@@ -24,7 +24,7 @@ Getting an Alan Application Server
 ----------------------------------
 Get a server by running a one-liner in a Unix-like shell:
 
-MacOs:
+macOS:
 ```sh
 bash -c "mkdir -p data runenv/image && curl -s https://alan-platform.com/utils/2018.28/darwin-x64/application-server.tar.gz | tar xzf - -C runenv/image && ln -s runenv/image/application-server application-server"
 ```
