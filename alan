@@ -9,7 +9,7 @@ set -e
 # If an "offline" file is present in the project, it will not download anything.
 
 
-VERSION="2018.28"  # bootstrap a new version using "alan bootstrap --version <version>"
+VERSION="2018.31"
 
 function find_up {
 	UP_DIR=$(pwd)
@@ -25,7 +25,7 @@ INSTALL_ROOT=$(find_up "versions.json")
 
 function pass_though {
 	if [[ ! -e "$SCRIPTDIR/alan-tools" ]]; then
-		echo "Run ./alan fetch first"
+		echo "Run ./alan bootstrap first"
 		exit
 	fi
 
@@ -41,7 +41,7 @@ function pass_though {
 	elif [[ -e "$INSTALL_ROOT/dataenv/platform/project-cli/alan-dataenv.sh" ]]; then
 		"$INSTALL_ROOT/dataenv/platform/project-cli/alan-dataenv.sh" "$@"
 	else
-		echo "Run ./alan fetch first"
+		echo "Run ./alan bootstrap first"
 	fi
 	exit
 }
@@ -51,6 +51,13 @@ function download_self {
 		echo "Cannot download in offline mode"
 		echo "Remove the 'offline' file to re-enable downloads"
 		exit 0
+	fi
+	if [[ -f "$INSTALL_ROOT/versions.json" && -f "$SCRIPTDIR/alan-tools/jq" ]]; then
+		READVER=$("$SCRIPTDIR/alan-tools/jq" -r '.["platform version"]' "$INSTALL_ROOT/versions.json")
+		echo $READVER
+		if [[ $READVER != "" ]]; then
+			VERSION=$READVER
+		fi
 	fi
 	curl -s "https://alan-platform.com/utils/$VERSION/$PLATFORM/utils.tar.gz" | tar xzfC - "$SCRIPTDIR"
 }
@@ -74,21 +81,20 @@ case $1 in
 		;;
 
 	--help)
-		echo "setup: [bootstrap|upgrade|fetch]"
-		echo "  bootstrap: download utilities needed by alan"
-		echo "  upgrade:   download the latest versions.json for projects"
-		echo "  fetch:     download an environment (use 'fetch --help' for more info)"
+		echo "usage: alan [bootstrap|package|connect|upgrade]"
+		echo -e "  \\033[1mbootstrap\\033[0m: download an environment (aka. fetch)"
+		echo -e "  \\033[1mpackage\\033[0m:   package a project for deployment"
+		echo -e "  \\033[1mconnect\\033[0m:   connect to an application-server (requires Linux or macOS)"
+		echo -e "  \\033[1mupgrade\\033[0m:   download the latest versions.json for projects"
+		echo ""
+		echo "  alan --help: display the information you're reading now"
+		echo "  alan --version: display the version of alan"
+		echo ""
+		echo "More info: https://alan-platform.com/docs/"
 		echo ""
 
-		pass_though "$@"
-		"$SCRIPTDIR/alan-tools/package.sh" "$@"
-		;;
-
-	bootstrap)
-		if [[ $2 == "--version" ]]; then
-			VERSION=$3
-		fi
-		download_self
+		pass_though --help
+		"$SCRIPTDIR/alan-tools/package.sh" --help
 		;;
 
 	upgrade)
@@ -102,7 +108,11 @@ case $1 in
 		"$SCRIPTDIR/alan-tools/package.sh" "$@"
 		;;
 
-	fetch)
+	bootstrap | fetch)
+		if [[ $2 == "--version" ]]; then
+			VERSION=$3
+			shift 2
+		fi
 		download_self
 
 		if [[ ${PWD##*/} == "migrations" && -f "versions.json" ]]; then
@@ -111,12 +121,12 @@ case $1 in
 		elif [[ "$2" == "" ]]; then
 			# allow shorthand for devenv
 			pushd "$INSTALL_ROOT" >> /dev/null
-				"$SCRIPTDIR/alan-tools/fetch" devenv
+			"$SCRIPTDIR/alan-tools/fetch" devenv
 			popd >> /dev/null
 		else
 			shift 1
 			pushd "$INSTALL_ROOT" >> /dev/null
-				"$SCRIPTDIR/alan-tools/fetch" "$@"
+			"$SCRIPTDIR/alan-tools/fetch" "$@"
 			popd >> /dev/null
 		fi
 		;;

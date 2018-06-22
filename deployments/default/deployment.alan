@@ -2,6 +2,9 @@ external systems
 
 instance data
 	'server'
+		from local migrate
+
+	'client'
 		from local
 
 	'reporter'
