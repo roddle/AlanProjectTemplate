@@ -1,9 +1,19 @@
-users anonymous
+users
+	anonymous
+	// dynamic :  . 'Users'
+	// password : . 'Password'
 
 roles
 	'User' : anonymous
+	// 'User' : dynamic
 
 
-root #writer 'User' #reader 'User' { }
+
+root #writer 'User' #reader 'User' {
+	/*
+	'Users': collection {
+		'Password': text
+	}*/
+}
 
 numerical-types

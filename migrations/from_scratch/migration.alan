@@ -1,18 +1,11 @@
 root (
-	// 'Users' : collection = (
-	// 	'root' (
-	// 		'Contracts' : collection = ( )
-	// 		'Name' : text = ""
-	// 		'Password' : text = "53cfd037ec848267703b98cc9847b1521276b0cd18fcb92b36062fbf96a70b45"
-	// 		'Roles' : group = (
-	// 			'Employee' : stategroup = 'Yes' ( )
-	// 			'Manager' : stategroup = 'Yes' ( )
-	// 			'Project Manager' : stategroup = 'Yes' ( )
-	// 			'Reviewer' : stategroup = 'Yes' ( )
-	// 		)
-	// 	)
-	// )
-	// 'Years' : collection = ( )
+	/* Create a "root" user with password "welcome":
+	'Users' : collection = (
+		'root' (
+			'Password' : text = "53cfd037ec848267703b98cc9847b1521276b0cd18fcb92b36062fbf96a70b45"
+		)
+	)
+	*/
 )
 
 numerical type conversion
