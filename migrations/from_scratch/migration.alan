@@ -15,7 +15,7 @@ root (
 			'Notes': text = "This isn't going to work"
 		)
 	)
-	'Organisations': collection = (
+	'Organizations': collection = (
 		'Acme' (
 			'Result Code': text => "Success"
 			'Address': text = "127.0.0.1"

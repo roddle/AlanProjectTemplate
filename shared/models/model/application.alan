@@ -19,7 +19,7 @@ root #writer 'User' #reader 'User' {
 		'Notes': text @identifying @multi-line
 	}
 
-	'Organisations': collection {
+	'Organizations': collection {
 		'Result Code': text -> .^ . 'Result Codes'
 		'Address': text
 		'Postal Code': text
