@@ -53,8 +53,7 @@ function download_self {
 		exit 0
 	fi
 	if [[ -f "$INSTALL_ROOT/versions.json" && -f "$SCRIPTDIR/alan-tools/jq" ]]; then
-		READVER=$("$SCRIPTDIR/alan-tools/jq" -r '.["platform version"]' "$INSTALL_ROOT/versions.json")
-		echo $READVER
+		READVER=$("$SCRIPTDIR/alan-tools/jq" -r '.["platform version"]' < "$INSTALL_ROOT/versions.json")
 		if [[ $READVER != "" ]]; then
 			VERSION=$READVER
 		fi
