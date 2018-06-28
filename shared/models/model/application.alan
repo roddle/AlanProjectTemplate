@@ -14,6 +14,43 @@ root #writer 'User' #reader 'User' {
 	'Users': collection {
 		'Password': text
 	}*/
+
+	'Result Codes': collection {
+		'Notes': text @identifying @multi-line
+	}
+
+	'Organisations': collection {
+		'Result Code': text -> .^ . 'Result Codes'
+		'Address': text
+		'Postal Code': text
+		'City': text
+		'Website': text
+		'General Phone Number': text
+
+		'Notities': text @multi-line
+
+		'Contacts': collection {
+			'Phone Number': text
+			'E-Mail Address': text
+			'Position': text
+			'Notes': text @multi-line
+		}
+
+		'Finished': stategroup @default: 'No' (
+			'Yes' -> { }
+			'No' -> {
+				'Call Back Date': natural 'date' @default: today
+				'Call Back Time': text @description: "Around what time is the contact available?"
+			}
+		)
+
+		'Activities': collection @guid @small {
+			'Date': natural 'date' @default: today
+			'Contact': text -> .^ . 'Contacts'
+			'Notes': text @multi-line
+		}
+	}
 }
 
 numerical-types
+	'date' @date

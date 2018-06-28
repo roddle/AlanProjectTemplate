@@ -6,6 +6,29 @@ root (
 		)
 	)
 	*/
+
+	'Result Codes': collection = (
+		'Success' (
+			'Notes': text = "A lot of potential here"
+		)
+		'Fail' (
+			'Notes': text = "This isn't going to work"
+		)
+	)
+	'Organisations': collection = (
+		'Acme' (
+			'Result Code': text => "Success"
+			'Address': text = "127.0.0.1"
+			'Postal Code': text = "101 AA"
+			'City': text = "Fairfield, New Jersey"
+			'Website': text = "http://acme.corp"
+			'General Phone Number': text = "555 - 123456"
+			'Notities': text = ""
+			'Contacts': collection = ( )
+			'Finished': stategroup = 'Yes' ( )
+			'Activities': collection = ( )
+		)
+	)
 )
 
 numerical type conversion
