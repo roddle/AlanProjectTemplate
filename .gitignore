@@ -1,13 +1,11 @@
 # Utils #
 ###################
-dataenv
-devenv
+.alan
 migrations/*/data
-alan-tools
-README.md
 
 # Compiled source #
 ###################
+dist
 migration
 *.migration
 definition.json
