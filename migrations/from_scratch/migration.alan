@@ -29,6 +29,9 @@ root (
 			'Activities': collection = ( )
 		)
 	)
+
+	// New collections can be initialized without entries like so:
+	// 'A Collection': collection = ( )
 )
 
 numerical type conversion
