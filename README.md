@@ -1,5 +1,7 @@
 You are looking at the project template for the Alan Application Platform.
 
+[![Build Status](https://travis-ci.com/M-industries/AlanProjectTemplate.svg?branch=master)](https://travis-ci.com/M-industries/AlanProjectTemplate)
+
 To learn how to use this project, please refer to the documentation at [alan-platform.com](https://alan-platform.com/docs/).
 
 ----------------
