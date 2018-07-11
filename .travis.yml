@@ -1,0 +1,10 @@
+os: osx
+
+install: true
+
+script:
+  - ./alan bootstrap
+  - ./alan build
+  - ./alan build -C migrations
+  - mv dist/from_scratch.migration deployments/default/instances/server.migration
+  - ./alan package dist/project.pkg deployments/default
