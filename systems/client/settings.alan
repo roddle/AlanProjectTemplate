@@ -3,6 +3,4 @@ application name: "Fabric"
 anonymous login: enabled
 csv actions: disabled
 report limit: 500
-system administrator role: 'User'
-power user role: 'User'
 announcement: "" [ ]

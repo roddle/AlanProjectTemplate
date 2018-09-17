@@ -3,13 +3,10 @@ users
 	// dynamic :  . 'Users'
 	// password : . 'Password'
 
-roles
-	'User' : anonymous
-	// 'User' : dynamic
+interfaces
 
 
-
-root #writer 'User' #reader 'User' {
+root {
 	/*
 	'Users': collection {
 		'Password': text

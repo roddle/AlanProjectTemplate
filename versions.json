@@ -1,14 +1,14 @@
 {
-	"platform version": "2018.38",
+	"platform version": "2018.40",
 	"system types": {
 		"auto-webclient": {
-			"version": "intrepid.17"
+			"version": "janeway.5"
 		},
 		"datastore": {
-			"version": "35"
+			"version": "37"
 		},
 		"reporter": {
-			"version": "29"
+			"version": "31"
 		}
 	}
 }
