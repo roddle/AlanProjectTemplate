@@ -2,13 +2,16 @@ users
 	anonymous
 	dynamic :  .'Users'
 	password : .'Password'
-
 /*
 	Read and write access to data can be restricted to certain users.
-	In this example we don't require users to log in, and anyone can access all data.
-	See the Hours project roles.alan for an example with specific permissions:
-	https://github.com/M-industries/Hours/blob/master/interfaces/model/application.alan
+
+	You can have both anonymous and dynamic users. Remove the anonymous keyword
+	to require all users to log into the application.
+
+	'dynamic' points to the collection of users.
+	'password' points to a text property to use as a password.
 */
+
 
 root {
 	//
@@ -167,6 +170,45 @@ root {
 		'yes' -> { }
 		'no' -> { }
 	)
+
+
+	//
+	// Permissions
+	//
+	'entries': collection {
+		/*
+			Permissions are set on nodes for:
+			- read
+			- update
+			- create
+			- delete
+
+			Check permissions:
+			- for states on the user
+			- if a reference points to the user
+			- if the user is in a collection
+
+			Permissions are inherited, but there is no cascade: only the first
+			occurence of a rule (found when "walking up" the model) is evaluated.
+		*/
+
+		// allow all users to read the entries in this collection
+		can-read: user
+		// restrict creation of entries to users where 'Manager' is set to 'Yes'
+		can-create: user ?'Manager'|'Yes'
+		// restrict deletion of an entry to its owner
+		can-delete: equal ( user , $ >'owner'>key )
+
+		/*
+			Permissions can be combined with "OR" rules, so this would
+			also enable update for users that the 'owner' reference points to
+		*/
+		can-update: user ?'Manager'|'Yes' || equal ( user , $ >'owner'>key )
+
+		'owner': text -> .^ .'Users'
+		'members': collection -> .^ .'Users' { }
+	}
+
 }
 
 numerical-types
