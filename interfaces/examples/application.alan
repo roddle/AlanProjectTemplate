@@ -175,29 +175,45 @@ root {
 	//
 	// Permissions
 	//
-	'entries': collection {
-		/*
-			Permissions are set on nodes for:
-			- read
-			- update
-			- create
-			- delete
+	/*
+		The following permissions can be configured for nodes:
+		- read
+		- update
+		Child nodes inherit permissions from ancestor nodes.
 
-			Check permissions:
-			- for states on the user
-			- if a reference points to the user
-			- if the user is in a collection
+		Reading a property value requires read permissions for all ancestor nodes of the property value.
+		Thus, starting at a property, all rules found when "walking up" the model are evaluated when requesting the property value.
 
-			Permissions are inherited, but there is no cascade: only the first
-			occurence of a rule (found when "walking up" the model) is evaluated.
-		*/
+		Updating a property value requires read permission for all ancestor nodes of the property value that is to be updated.
+		In addition, the nearest can-update rule is evaluated.
+		For example, updating an 'owner' of an 'entries' item (see below), requires read permissions for the 'entries' item.
+		In addition, it requires update permission for the 'entries' node (as specified by the nearest can-update statement shown below).
 
-		// allow all users to read the entries in this collection
-		can-read: user
+		The following permissions can be configured for states and collections:
+		- create
+		- delete
+		If these permissions are left unspecified, the overlying update permission applies to create and delete.
+		Child properties do not inherit create and delete permissions specified at ancestor collections and states.
+
+		Some basic types of permission checks:
+		- check if the user has state groups set to specific states (existence)
+		- check if a reference points to the user                   (equality)
+		- check if the user exists in a collection                  (containment)
+	*/
+	'entries': collection
 		// restrict creation of entries to users where 'Manager' is set to 'Yes'
 		can-create: user ?'Manager'|'Yes'
 		// restrict deletion of an entry to its owner
 		can-delete: equal ( user , $ >'owner'>key )
+	{
+		// allow all users to read the entries in this collection
+		can-read: user
+
+		// allow all users (including anonymous users if configured) to read entries in this collection
+		can-read: unrestricted
+
+		// allow only members of an 'entries' item to read the item
+		can-read: any $ .'members' [ user ] // members collection has to contain the user
 
 		/*
 			Permissions can be combined with "OR" rules, so this would
