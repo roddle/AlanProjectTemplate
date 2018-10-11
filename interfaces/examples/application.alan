@@ -195,10 +195,10 @@ root {
 		If these permissions are left unspecified, the overlying update permission applies to create and delete.
 		Child properties do not inherit create and delete permissions specified at ancestor collections and states.
 
-		Some basic types of permission checks:
-		- check if the user has state groups set to specific states (existence)
-		- check if a reference points to the user                   (equality)
-		- check if the user exists in a collection                  (containment)
+		Available types of permission checks:
+		- the user has state groups set to specific states (existence)
+		- a reference points to the user                   (equality)
+		- the user exists in a collection                  (containment)
 	*/
 	'entries': collection
 		// restrict creation of entries to users where 'Manager' is set to 'Yes'
@@ -208,16 +208,14 @@ root {
 	{
 		// allow all users to read the entries in this collection
 		can-read: user
-
-		// allow all users (including anonymous users if configured) to read entries in this collection
+		// allow all users (including anonymous users) to read entries in this collection
 		can-read: unrestricted
-
-		// allow only members of an 'entries' item to read the item
+		// allow only "members" to read the item
 		can-read: any $ .'members' [ user ] // members collection has to contain the user
 
 		/*
 			Permissions can be combined with "OR" rules, so this would
-			also enable update for users that the 'owner' reference points to
+			also enable update for both "managers" and the "owner"
 		*/
 		can-update: user ?'Manager'|'Yes' || equal ( user , $ >'owner'>key )
 
